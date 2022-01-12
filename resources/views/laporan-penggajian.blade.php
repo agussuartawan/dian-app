@@ -46,11 +46,14 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>NIK</th>
                 <th>Nama Karyawan</th>
                 <th>Uang Makan</th>
                 <th>Uang Lembur</th>
                 <th>Hari Kerja</th>
                 <th>Tanggal Penggajian</th>
+                <th>Gaji Bulan</th>
+                <th>Komponen Tambahan</th>
                 <th>Gaji</th>
             </tr>
         </thead>
@@ -59,6 +62,9 @@
                 <tr>
                     <td class="text-center">
                         <p>{{ $i + 1 }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $row->NIK }}</p>
                     </td>
                     <td>
                         <p>{{ $row->relasiKaryawan->nama_karyawan }}</p>
@@ -74,6 +80,12 @@
                     </td>
                     <td class="text-center">
                         <p>{{ Carbon\Carbon::parse($row->tanggal_penggajian)->isoFormat('DD MMMM Y') }}</p>
+                    </td>
+                    <td>
+                        <p>{{ $row->bulan_gaji }}</p>
+                    </td>
+                    <td>
+                        <p>{{ rupiah($row->komponen) }} ({{ $row->keterangan }})</p>
                     </td>
                     <td>
 

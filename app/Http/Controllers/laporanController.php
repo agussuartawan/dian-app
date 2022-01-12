@@ -27,7 +27,7 @@ class laporanController extends Controller
     {
         $date['from'] = $request->from;
         $date['to'] = $request->to;
-        $rows= Penggajian::whereBetween('tanggal_penggajian',$date)->orderBy('tanggal_penggajian','asc')->get();
+        $rows= Penggajian::with('relasiKaryawan')->has('relasiKaryawan')->whereBetween('tanggal_penggajian',$date)->orderBy('tanggal_penggajian','asc')->get();
       
         $pdf = PDF::loadview('laporan-penggajian',['rows'=>$rows, 'date' => $date]);
     	return $pdf->stream('laporan-penggajian.pdf');
@@ -36,7 +36,7 @@ class laporanController extends Controller
     {
         $date['from'] = $request->from;
         $date['to'] = $request->to;
-        $rows= Komisi::whereBetween('tanggal_komisi',$date)->orderBy('tanggal_komisi','asc')->get();
+        $rows= Komisi::with('relasiKaryawan')->has('relasiKaryawan')->whereBetween('tanggal_komisi',$date)->orderBy('tanggal_komisi','asc')->get();
       
         $pdf = PDF::loadview('laporan-komisi',['rows'=>$rows, 'date' => $date]);
     	return $pdf->stream('laporan-komisi.pdf');

@@ -38,6 +38,7 @@
                                         <div class="form-group">
                                             <input type="file" name="file" required>
                                         </div>
+                                        <a href="{{ asset('template/dataAbsenkaryawan.xlsx') }}"> Download template excel</a>
                                     </div>
 
 
@@ -120,7 +121,6 @@
                     <th>Tanggal Absensi</th>
                     <th>jam Masuk</th>
                     <th>Jam Pulang</th>
-                    <th>Status Lembur </th>
                     {{-- <th>Aksi</th> --}}
                 </tr>
             </thead>
@@ -128,11 +128,10 @@
             @foreach ($rows as $row)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $row->RelasiAbsen->nama_karyawan }}</td>
+                    <td>@if ($row->RelasiAbsen->nama_karyawan) {{ $row->RelasiAbsen->nama_karyawan }} @else @continue @endif</td>
                     <td> {{ Carbon\Carbon::parse($row->tanggal_absensi)->isoFormat('DD MMMM Y') }} </td>
                     <td>{{ $row->jam_masuk }}</td>
                     <td>{{ $row->jam_pulang }}</td>
-                    <td>{{ $row->status_lembur }}</td>
                     {{-- <td>
                     <a class="btn btn-sm btn-warning" href="{{ route('absensi.edit', $row) }}">Ubah</a>
                     <form method="POST" action="{{ route('absensi.destroy', $row) }}" style="display: inline-block;">

@@ -6,6 +6,7 @@ use App\Models\Penggajian;
 use App\Models\Transaksi;
 use App\Models\Karyawan;
 use App\Models\Absensi;
+use App\Models\Komisi;
 use Illuminate\Support\Facades\DB;
 
 
@@ -76,7 +77,51 @@ class dashboardController extends Controller
            
         // ];
         // return response()->json($categories);
-        return view('dashboard',['categories'=>$categories,'karyawan'=>$karyawan,'categori'=>$categori, 'categori_hari' => $categori_hari]);
+
+        //Hitung data karyawan
+        $total_karyawan = Karyawan::count();
+        $admin = Karyawan::where('divisi', 'admin')->count();
+        $akunting = Karyawan::where('divisi', 'accounting')->count();
+        $sales = Karyawan::where('divisi', 'sales')->count();
+
+        //Hitung gaji
+        $total_gaji = Penggajian::sum('total_gaji');
+        $gaji_admin = Penggajian::whereHas('relasiKaryawan', function($q)
+                        {
+                            $q->where('divisi', '=', 'admin');
+                        
+                        })->sum('total_gaji');
+        $gaji_akunting = Penggajian::whereHas('relasiKaryawan', function($q)
+                        {
+                            $q->where('divisi', '=', 'accounting');
+                        
+                        })->sum('total_gaji');
+        $gaji_sales = Penggajian::whereHas('relasiKaryawan', function($q)
+                        {
+                            $q->where('divisi', '=', 'sales');
+                        
+                        })->sum('total_gaji');
+
+        //Hitung komisi
+        $komisi = Komisi::with('relasiKaryawan')->has('relasiKaryawan')->orderBy('total_komisi', 'DESC')->limit(5)->get();
+        $total_penjualan = Komisi::sum('total_penjualan');
+
+        return view('dashboard',[
+            'categories'=>$categories,
+            'karyawan'=>$karyawan,
+            'categori'=>$categori, 
+            'categori_hari' => $categori_hari,
+            'total_karyawan' => $total_karyawan,
+            'admin' => $admin,
+            'akunting' => $akunting,
+            'sales' => $sales,
+            'total_gaji' => rupiah($total_gaji),
+            'gaji_admin' => rupiah($gaji_admin),
+            'gaji_akunting' => rupiah($gaji_akunting),
+            'gaji_sales' => rupiah($gaji_sales),
+            'komisi' => $komisi,
+            'total_penjualan' => $total_penjualan
+        ]);
       
     }
 

@@ -18,10 +18,9 @@ class absensiController extends Controller
      */
     public function index(Request $request)
     {
-            $rows = Absensi::all();
+        $rows = Absensi::with('RelasiAbsen')->has('RelasiAbsen')->get();
                 
-                
-            return view('index-absensi', compact('rows'));
+        return view('index-absensi', compact('rows'));
 
         // $data['title'] = 'Data Absensi';
         // $data['q'] = $request->q;

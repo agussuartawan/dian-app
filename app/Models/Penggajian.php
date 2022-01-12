@@ -30,7 +30,5 @@ class Penggajian extends Model
       
         return $this->belongsTo(Karyawan::class, 'NIK', 'NIK');
 
-    }
-
-    
+    }    
 }

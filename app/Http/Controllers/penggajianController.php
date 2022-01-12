@@ -21,7 +21,7 @@ class penggajianController extends Controller
     {        
         $passfilter=false;
         $ubahfilter=false;
-        $rows = Penggajian::all();
+        $rows = Penggajian::with('relasiKaryawan')->has('relasiKaryawan')->get();
         
 
         return view('index-penggajian', compact('rows','passfilter','ubahfilter'));

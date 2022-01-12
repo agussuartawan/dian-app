@@ -46,6 +46,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>NIK</th>
                 <th>Nama Sales</th>
                 <th>Bulan Penjualan</th>
                 <th>Tanggal Komisi</th>
@@ -60,6 +61,9 @@
                 <tr>
                     <td class="text-center">
                         <p>{{ $i + 1 }}</p>
+                    </td>
+                    <td class="text-center">
+                        <p>{{ $row->NIK }}</p>
                     </td>
                     <td>
                         <p>{{ $row->relasiKaryawan->nama_karyawan }}</p>

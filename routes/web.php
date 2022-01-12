@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'],function(){
        
         Route::get('fill',[App\Http\Controllers\dashboardController::class,'store'])->name('dashboardpenjualan');
        
-         Route::get('fillkar',[App\Http\Controllers\dashboardController::class,'storekar'])->name('dashboardkar');
+        Route::get('fillkar',[App\Http\Controllers\dashboardController::class,'storekar'])->name('dashboardkar');
 
         Route::get('filter-laporan-penggajian', [\App\Http\Controllers\laporanController::class, 'index'])->name('filter-laporan-gaji');
         
@@ -48,17 +48,17 @@ Route::group(['middleware' => 'auth'],function(){
         Route::get('laporan-penggajian', [\App\Http\Controllers\laporanController::class, 'laporanPenggajian'])->name('laporanGaji');
         Route::get('laporan-komisi', [\App\Http\Controllers\laporanController::class, 'laporanKomisi'])->name('laporankomisi');
 
-         Route::get('index-slip-gaji-pribadi', [\App\Http\Controllers\penggajianController::class, 'indexSlipGajiPribadi'])->name('index-slip-gaji-pribadii');
+        Route::get('index-slip-gaji-pribadi', [\App\Http\Controllers\penggajianController::class, 'indexSlipGajiPribadi'])->name('index-slip-gaji-pribadii');
         Route::get('index-slip-komisi-pribadi', [\App\Http\Controllers\komisiController::class, 'indexSlipKomisiPribadi'])->name('index-slip-komisi-pribadii');
 
 
-         //route untuk dashboard sales
-         Route::get('dashboardsales',[App\Http\Controllers\dashboardController::class,'indexsales'])->name('dashboardsales.index');
-         Route::get('fillsales',[App\Http\Controllers\dashboardController::class,'storeSales'])->name('dashboardpenjualansales');
+        //route untuk dashboard sales
+        Route::get('dashboardsales',[App\Http\Controllers\dashboardController::class,'indexsales'])->name('dashboardsales.index');
+        Route::get('fillsales',[App\Http\Controllers\dashboardController::class,'storeSales'])->name('dashboardpenjualansales');
        
-          //route untuk dashboard karyawan
-         Route::get('dashboardkar',[App\Http\Controllers\dashboardController::class,'indexkaryawan'])->name('dashboardkar.index');
-         Route::get('fillkarya',[App\Http\Controllers\dashboardController::class,'storeKaryawan'])->name('dashboardpenjualankaryawan');
+        //route untuk dashboard karyawan
+        Route::get('dashboardkar',[App\Http\Controllers\dashboardController::class,'indexkaryawan'])->name('dashboardkar.index');
+        Route::get('fillkarya',[App\Http\Controllers\dashboardController::class,'storeKaryawan'])->name('dashboardpenjualankaryawan');
        
 
         

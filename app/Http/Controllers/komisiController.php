@@ -20,7 +20,7 @@ class komisiController extends Controller
     public function index(Request $request)
     {
         $pasfilter=false;
-        $rows = Komisi::all();
+        $rows = Komisi::with('relasiKaryawan')->has('relasiKaryawan')->get();
         return view('index-komisi', compact('rows','pasfilter'));
     }
 
