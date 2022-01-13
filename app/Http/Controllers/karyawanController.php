@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
 use App\Models\Karyawan;
+use App\Models\Komisi;
+use App\Models\Penggajian;
 use App\Models\User;
 use Illuminate\Http\Request;
+use DB;
 
 class karyawanController extends Controller
 {
@@ -156,7 +160,14 @@ class karyawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
-        $karyawan->delete();
+        DB::transaction(function() use ($karyawan) {
+            User::where('id_user', $karyawan->id_user)->delete();
+            Absensi::where('NIK', $karyawan->NIK)->delete();
+            Komisi::where('NIK', $karyawan->NIK)->delete();
+            Penggajian::where('NIK', $karyawan->NIK)->delete();
+            
+            $karyawan->delete();
+        });
         return redirect('karyawan')->with('success', 'Hapus Data Berhasil');
     }
 }
