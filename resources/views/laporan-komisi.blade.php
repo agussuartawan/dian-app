@@ -33,7 +33,19 @@
             border: 1px solid #000000;
         }
 
-        .text-center {
+        .ttd{
+            float: right;
+            margin-top: 4rem;
+            width: 20rem;
+            margin-right: 0;
+        }
+
+        .nama-ttd{
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .lokasi {
             text-align: center;
         }
 
@@ -92,6 +104,14 @@
             @endforeach
         </tbody>
     </table>
+    <div class="ttd">
+        <div class="lokasi">
+            <span>Denpasar, {{ Carbon\Carbon::now()->isoFormat('DD MMMM Y') }}</span>
+        </div>
+        <div class="nama-ttd">
+            <span>(Lingdia Martanto)</span>
+        </div>
+    </div>
 </body>
 
 </html>
